@@ -1,7 +1,7 @@
 Common Prefix | c64b4cfa3e9c48d8f8c9a761cfde79eb
 ==========
 
-This project, when initialized, accepts array of string
+This project, when initialized, accepts array of strings and find the most common prefix in the inserted array (see the examples below).
 
 ## Installation
 
