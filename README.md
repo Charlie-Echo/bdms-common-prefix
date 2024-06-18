@@ -31,7 +31,7 @@ Please provide the array:
 ```
 The project will ask for the array of strings to find the common prefix. If you inserted the invalid data, this project will reject the array with a message.
 
-Example of valid inputs (double quote only):
+## Example of valid inputs (double quote only):
 ```
 ["flower","flow","flight"] will return "fl"
 ["dog","racecar","car"] will return ""
