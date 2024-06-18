@@ -25,7 +25,9 @@ function startApp() {
             startApp();
         } else {
             const convertedInput = convertToArray(input);
-            if (convertedInput.length > 0) {
+            if (convertedInput.findIndex(data => typeof data !== 'string') !== -1) {
+                console.error(emptyArrayErrorMessage);
+            } else if (convertedInput.length > 0) {
                 displayDonationResult(findCommonPrefix(
                     convertedInput, findMaxPrefixLength(convertedInput)
                 ));
