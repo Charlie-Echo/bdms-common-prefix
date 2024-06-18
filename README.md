@@ -33,7 +33,8 @@ The project will ask for the array of strings to find the common prefix. If you 
 
 ## Example of valid inputs (double quote only):
 ```
-["flower","flow","flight"] will return "fl"
-["dog","racecar","car"] will return ""
-["aaaaaa","aaaaaa","aaaaaa","aaaaaa","aaaaaa","aaab","aaaaaa"] will return "aaa"
+["flower","flow","flight"] => will return "fl".
+["dog","racecar","car"] => will return "".
+["aaaaaa","aaaaaa","aaaaaa","aaaaaa","aaaaaa","aaab","aaaaaa"] => will return "aaa".
+exit => will stop the application from running.
 ```
