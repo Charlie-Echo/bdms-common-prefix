@@ -24,15 +24,11 @@ function startApp() {
             console.error(emptyArrayErrorMessage);
             startApp();
         } else {
-            let result: { amount: number, prefix: string[] };
             const convertedInput = convertToArray(input);
             if (convertedInput.length > 0) {
-                result = findCommonPrefix(convertedInput, findMaxPrefixLength(convertedInput));
-                if (result.prefix.length > 1) {
-                    result = { amount: 0, prefix: [] };
-                }
-
-                displayDonationResult(result);
+                displayDonationResult(findCommonPrefix(
+                    convertedInput, findMaxPrefixLength(convertedInput)
+                ));
             } else {
                 console.error(emptyArrayErrorMessage);
             }
@@ -63,15 +59,14 @@ function findMaxPrefixLength(input: string[]): number {
     }, []));
 }
 
-function findCommonPrefix(convertedInput: string[], prefixLength: number): { amount: number, prefix: string[] } {
+function findCommonPrefix(convertedInput: string[], prefixLength: number): string {
     const list = getPrefixListByLength(convertedInput, prefixLength);
-    let response = findMostCommonPrefix(list);
-    if (response.prefix.length > 1 && prefixLength > 1) {
+    let response = Object.keys(list).find(prefix => list[prefix] === convertedInput.length);
+    if (!response && prefixLength > 1) {
         response = findCommonPrefix(convertedInput, prefixLength - 1)
     }
 
-    return response;
-
+    return response ? response : '';
 }
 
 function getPrefixListByLength(data: string[], prefixLength: number): { [key: string]: number } {
@@ -91,23 +86,8 @@ function getPrefixListByLength(data: string[], prefixLength: number): { [key: st
     return response;
 }
 
-function findMostCommonPrefix(data: { [key: string]: number }): { amount: number, prefix: string[] } {
-    let response = { amount: 0, prefix: [] };
-    Object.keys(data).forEach(eachData => {
-        if (data[eachData] > response.amount) {
-            response.amount = data[eachData];
-            response.prefix = [eachData];
-        }
-        else if (data[eachData] === response.amount) {
-            response.prefix.push(eachData);
-        }
-    });
-
-    return response;
-}
-
-function displayDonationResult(data: { amount: number, prefix: string[] }) {
+function displayDonationResult(prefix: string) {
     console.log('####################### Execution Complete! #######################');
-    console.log(`${greenTerminalText}"${data.prefix.toString()}"`);
+    console.log(`${greenTerminalText}"${prefix}"`);
     console.log(`${resetTerminalText}####################### Execution Complete! #######################`);
 }
