@@ -28,7 +28,7 @@ function startApp() {
             if (convertedInput.findIndex(data => typeof data !== 'string') !== -1) {
                 console.error(emptyArrayErrorMessage);
             } else if (convertedInput.length > 0) {
-                displayDonationResult(findCommonPrefix(
+                displayResult(findCommonPrefix(
                     convertedInput, findMaxPrefixLength(convertedInput)
                 ));
             } else {
@@ -62,6 +62,8 @@ function findMaxPrefixLength(input: string[]): number {
 }
 
 function findCommonPrefix(convertedInput: string[], prefixLength: number): string {
+    if (prefixLength === Infinity) return '';
+
     const list = getPrefixListByLength(convertedInput, prefixLength);
     let response = Object.keys(list).find(prefix => list[prefix] === convertedInput.length);
     if (!response && prefixLength > 1) {
@@ -88,7 +90,7 @@ function getPrefixListByLength(data: string[], prefixLength: number): { [key: st
     return response;
 }
 
-function displayDonationResult(prefix: string) {
+function displayResult(prefix: string) {
     console.log('####################### Execution Complete! #######################');
     console.log(`${greenTerminalText}"${prefix}"`);
     console.log(`${resetTerminalText}####################### Execution Complete! #######################`);
